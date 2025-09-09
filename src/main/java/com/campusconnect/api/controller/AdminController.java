@@ -11,7 +11,9 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
@@ -85,16 +87,17 @@ public class AdminController {
     }
 
     @GetMapping("/stats")
-    public ResponseEntity<Object> getSystemStats() {
+    public ResponseEntity<?> getSystemStats() {
         long totalUsers = userRepository.count();
         long verifiedUsers = userRepository.findByVerificationStatus(VerificationStatus.VERIFIED).size();
         long pendingUsers = userRepository.findByVerificationStatus(VerificationStatus.PENDING_VERIFICATION).size();
 
-        return ResponseEntity.ok(new Object() {
-            public final long totalUsers = totalUsers;
-            public final long verifiedUsers = verifiedUsers;
-            public final long pendingUsers = pendingUsers;
-        });
+        Map<String, Long> response = new HashMap<>();
+        response.put("totalUsers", totalUsers);
+        response.put("verifiedUsers", verifiedUsers);
+        response.put("pendingUsers", pendingUsers);
+
+        return ResponseEntity.ok(response);
     }
 
     private UserProfileResponseDTO mapToUserProfileResponse(User user) {

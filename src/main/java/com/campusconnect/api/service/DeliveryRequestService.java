@@ -1,6 +1,6 @@
 package com.campusconnect.api.service;
 
-import com.campusconnect.api.config.JwtService;
+import com.campusconnect.api.security.JwtService;
 import com.campusconnect.api.dto.delivery.CompleteDeliveryRequestDTO;
 import com.campusconnect.api.dto.delivery.CreateDeliveryRequestDTO;
 import com.campusconnect.api.dto.delivery.DeliveryRequestResponseDTO;
@@ -20,14 +20,11 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 

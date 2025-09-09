@@ -1,20 +1,15 @@
 package com.campusconnect.api.controller;
 
-import com.campusconnect.api.config.CachedPage;
 import com.campusconnect.api.dto.PaginatedResponseDTO;
 import com.campusconnect.api.dto.trip.CreateTripRequestDTO;
 import com.campusconnect.api.dto.trip.TripResponseDTO;
 import com.campusconnect.api.dto.trip.UpdateTripRequestDTO;
-import com.campusconnect.api.entity.enums.TripStatus;
 import com.campusconnect.api.service.TripService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

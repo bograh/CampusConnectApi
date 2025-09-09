@@ -57,6 +57,7 @@ public class DeliveryRequest {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
+    @Builder.Default
     private Priority priority = Priority.NORMAL;
 
     @Column(nullable = false, precision = 10, scale = 2)
@@ -76,6 +77,7 @@ public class DeliveryRequest {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
+    @Builder.Default
     private RequestStatus status = RequestStatus.PENDING;
 
     @ManyToOne(fetch = FetchType.LAZY)

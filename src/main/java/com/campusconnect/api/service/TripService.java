@@ -1,7 +1,6 @@
 package com.campusconnect.api.service;
 
-import com.campusconnect.api.config.CachedPage;
-import com.campusconnect.api.config.JwtService;
+import com.campusconnect.api.security.JwtService;
 import com.campusconnect.api.dto.PaginatedResponseDTO;
 import com.campusconnect.api.dto.PaginationDTO;
 import com.campusconnect.api.dto.trip.CreateTripRequestDTO;
@@ -31,7 +30,6 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service

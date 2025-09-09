@@ -1,17 +1,17 @@
 package com.campusconnect.api.controller;
 
 import com.campusconnect.api.dto.auth.AuthResponseDTO;
+import com.campusconnect.api.dto.auth.MultipartSignupRequestDTO;
 import com.campusconnect.api.dto.auth.PhoneVerificationRequestDTO;
 import com.campusconnect.api.dto.auth.SignInRequestDTO;
-import com.campusconnect.api.dto.auth.SignupRequestDTO;
 import com.campusconnect.api.dto.user.UserProfileResponseDTO;
 import com.campusconnect.api.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -20,9 +20,9 @@ import org.springframework.web.bind.annotation.*;
 public class AuthController {
     private final UserService userService;
 
-    @PostMapping("/signup")
-    public ResponseEntity<AuthResponseDTO> signup(@Valid @RequestBody SignupRequestDTO request) {
-        AuthResponseDTO response = userService.signup(request);
+    @PostMapping(value = "/signup", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<AuthResponseDTO> signupMultipart(@Valid @ModelAttribute MultipartSignupRequestDTO request) {
+        AuthResponseDTO response = userService.signupMultipart(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 

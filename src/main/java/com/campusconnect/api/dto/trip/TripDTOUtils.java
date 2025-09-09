@@ -70,7 +70,7 @@ public class TripDTOUtils {
         LocationDTO locationDTO = new LocationDTO();
         locationDTO.setType(location.getType());
         locationDTO.setCampusLocation(location.getCampusLocation());
-        location.setOffCampusAddress(location.getOffCampusAddress());
+        locationDTO.setOffCampusLocation(location.getOffCampusAddress());
         return locationDTO;
     }
 

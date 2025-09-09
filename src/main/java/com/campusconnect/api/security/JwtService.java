@@ -1,4 +1,4 @@
-package com.campusconnect.api.config;
+package com.campusconnect.api.security;
 
 import com.campusconnect.api.entity.User;
 import com.campusconnect.api.repository.UserRepository;

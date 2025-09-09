@@ -1,6 +1,6 @@
 package com.campusconnect.api.service;
 
-import com.campusconnect.api.config.JwtService;
+import com.campusconnect.api.security.JwtService;
 import com.campusconnect.api.dto.message.MessageResponseDTO;
 import com.campusconnect.api.dto.message.SendMessageRequestDTO;
 import com.campusconnect.api.entity.Message;

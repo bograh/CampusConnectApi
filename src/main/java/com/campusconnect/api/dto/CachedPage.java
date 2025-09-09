@@ -1,4 +1,4 @@
-package com.campusconnect.api.config;
+package com.campusconnect.api.dto;
 
 import java.util.List;
 

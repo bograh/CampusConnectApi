@@ -1,7 +1,8 @@
 package com.campusconnect.api.service;
 
-import com.campusconnect.api.config.JwtService;
+import com.campusconnect.api.security.JwtService;
 import com.campusconnect.api.dto.auth.AuthResponseDTO;
+import com.campusconnect.api.dto.auth.MultipartSignupRequestDTO;
 import com.campusconnect.api.dto.auth.PhoneVerificationRequestDTO;
 import com.campusconnect.api.dto.auth.SignInRequestDTO;
 import com.campusconnect.api.dto.auth.SignupRequestDTO;
@@ -61,6 +62,58 @@ public class UserService {
         if (request.getSelfieImage() != null) {
             ImageData imageData = imageService.uploadImage(request.getSelfieImage(), "selfies");
             user.setSelfieImage(imageData);
+        }
+
+        user = userRepository.save(user);
+
+        phoneVerificationService.sendVerificationCode(user.getPhoneNumber());
+
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(user.getEmail(), request.getPassword())
+        );
+        String token = jwtService.generateAccessToken(authentication);
+
+        AuthResponseDTO response = new AuthResponseDTO();
+        response.setMessage("User created successfully. Please verify your phone number.");
+        response.setToken(token);
+        response.setUser(mapToUserResponse(user));
+
+        return response;
+    }
+
+    @Transactional
+    public AuthResponseDTO signupMultipart(MultipartSignupRequestDTO request) {
+        validateUniqueUser(request.getEmail(), request.getStudentId(), request.getPhoneNumber());
+
+        User user = User.builder()
+                .firstName(request.getFirstName())
+                .lastName(request.getLastName())
+                .email(request.getEmail())
+                .password(passwordEncoder.encode(request.getPassword()))
+                .studentId(request.getStudentId())
+                .phoneNumber(request.getPhoneNumber())
+                .verificationStatus(VerificationStatus.PENDING_VERIFICATION)
+                .build();
+
+        // Handle multipart file uploads
+        if (request.getStudentIdImage() != null && !request.getStudentIdImage().isEmpty()) {
+            try {
+                ImageData imageData = imageService.uploadImage(request.getStudentIdImage(), "student-ids");
+                user.setStudentIdImage(imageData);
+            } catch (Exception e) {
+                log.error("Failed to upload student ID image: {}", e.getMessage());
+                throw new RuntimeException("Failed to upload student ID image: " + e.getMessage());
+            }
+        }
+
+        if (request.getSelfieImage() != null && !request.getSelfieImage().isEmpty()) {
+            try {
+                ImageData imageData = imageService.uploadImage(request.getSelfieImage(), "selfies");
+                user.setSelfieImage(imageData);
+            } catch (Exception e) {
+                log.error("Failed to upload selfie image: {}", e.getMessage());
+                throw new RuntimeException("Failed to upload selfie image: " + e.getMessage());
+            }
         }
 
         user = userRepository.save(user);

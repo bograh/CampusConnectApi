@@ -66,14 +66,18 @@ public class User {
     @Embedded
     @AttributeOverrides({
             @AttributeOverride(name = "url", column = @Column(name = "student_id_image_url")),
-            @AttributeOverride(name = "publicId", column = @Column(name = "student_id_image_public_id"))
+            @AttributeOverride(name = "publicId", column = @Column(name = "student_id_image_public_id")),
+            @AttributeOverride(name = "width", column = @Column(name = "student_id_image_width")),
+            @AttributeOverride(name = "height", column = @Column(name = "student_id_image_height"))
     })
     private ImageData studentIdImage;
 
     @Embedded
     @AttributeOverrides({
             @AttributeOverride(name = "url", column = @Column(name = "selfie_image_url")),
-            @AttributeOverride(name = "publicId", column = @Column(name = "selfie_image_public_id"))
+            @AttributeOverride(name = "publicId", column = @Column(name = "selfie_image_public_id")),
+            @AttributeOverride(name = "width", column = @Column(name = "selfie_image_width")),
+            @AttributeOverride(name = "height", column = @Column(name = "selfie_image_height"))
     })
     private ImageData selfieImage;
 

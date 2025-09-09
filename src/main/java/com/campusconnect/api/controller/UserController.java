@@ -1,6 +1,6 @@
 package com.campusconnect.api.controller;
 
-import com.campusconnect.api.config.JwtService;
+import com.campusconnect.api.security.JwtService;
 import com.campusconnect.api.dto.user.ChangePasswordRequestDTO;
 import com.campusconnect.api.dto.user.UpdateUserProfileRequestDTO;
 import com.campusconnect.api.dto.user.UserProfileResponseDTO;

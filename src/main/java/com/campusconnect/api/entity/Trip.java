@@ -57,16 +57,19 @@ public class Trip {
     private Integer maxDeliveries;
 
     @Column(nullable = false)
+    @Builder.Default
     private Integer currentDeliveries = 0;
 
     @Column(nullable = false, precision = 10, scale = 2)
     private BigDecimal pricePerDelivery;
 
     @Column(nullable = false)
+    @Builder.Default
     private Boolean isRecurring = false;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
+    @Builder.Default
     private TripStatus status = TripStatus.ACTIVE;
 
     private String description;
